@@ -1,0 +1,18 @@
+Here we write the questions that we try to explore with the mooring data.
+
+Let's number the NB like: 01.TP_stock.ipynb
+
+so we can point the questions to the corresponding notebook like in this example:
+
+-[01] Explore the dynamics of toilet paper stocks. 
+
+QUESTIONS AND IDEAS
+
+-[] Statistics of Temperarture Profiles (RBR and SBE).
+-[] Statistics of speed and direction near the bottom (Aquadopp).
+-[] SBE exploration? Compute densities and explore salinty?	
+-[] Is there a mean warming or cooling at certain layers?
+-[] Detect mixing or near mixing events, where temperature gradients are negative or close to zero.
+-[] What is the vertical extension of seasonality?
+-[] Can we detect passing Meddies (900m - 1000m)?
+
