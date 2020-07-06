@@ -56,8 +56,8 @@ for year in years:
     ax1 = fig.add_subplot(111)
     ax2 = ax1.twiny()
 
-    #for j, depth in enumerate(sorted(PowerSpectra.keys())):
-    for depth in sorted(PowerSpectra.keys()):
+    for j, depth in enumerate(sorted(PowerSpectra.keys())):
+    #for depth in sorted(PowerSpectra.keys()):
         ax1.loglog(PowerSpectra[depth]['freq'],
                    PowerSpectra[depth]['psd'],
                    label=f"{depth:0.0f}m",
