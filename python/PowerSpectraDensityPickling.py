@@ -7,14 +7,17 @@ import gsw
 
 # instrument = sys.argv[1] # 'rbr', 'sbe'
 years = list(sys.argv[1:])
+lat = 37 + .17/.6
+lon = 32 + .16/.4
 
 for year in years:
     print(year)
     Data = {}
     PowerSpectra = {}
 
-    if year == 2011:
+    if year == '2011':
         dt = 180/(3600*24) # 2011 has a period of 180s
+
     else:
         dt = 360/(3600*24)
 
@@ -27,9 +30,10 @@ for year in years:
 
             try:
                 temp_aux = np.array(nc[str(d_i)]['TEMP'][:])
-                sal_aux = np.array(nc[str(d_i)]['PSAL'][:])
+                prac_sal = np.array(nc[str(d_i)]['PSAL'][:])
                 pres_aux = np.array(nc[str(d_i)]['PRES'][:])
-                Data[d_i] = gsw.density.rho_t_exact(sal_aux, temp_aux, pres_aux)
+                abs_sal = gsw.SA_from_SP(prac_sal, pres_aux, lon, lat)
+                Data[d_i] = gsw.density.rho_t_exact(abs_sal, temp_aux, pres_aux)
 
             except:
                 print(f'Not able to compute density for {year} - {d_i}.')

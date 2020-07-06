@@ -22,7 +22,7 @@ for year in years:
                 #Data[depth] = np.array(nc['TEMP'][:,i].data)
 
     elif instrument == 'sbe':
-        if year == 2011:
+        if year == '2011':
             dt = 180/(3600*24) # 2011 has a period of 180s
         else:
             dt = 360/(3600*24)
