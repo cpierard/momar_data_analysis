@@ -4,7 +4,7 @@ import sys
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 plt.rcParams.update({'font.size': 14})
-colormap='inferno_r'
+colormap='tab10'
 
 def lucky_bvf(z_i):
     with open('../../support_data/bvs_lucky.pkl', 'rb') as f:
@@ -47,11 +47,11 @@ for year in years:
     with open(path, 'rb') as f:
         PowerSpectra= pickle.load(f)
 
-    x_colors = np.linspace(0.4, 1, len(PowerSpectra.keys()))
+    x_colors = np.linspace(0, 1, len(PowerSpectra.keys()))
     colors = cm.get_cmap(colormap)(x_colors)
 
 
-    fig = plt.figure(figsize=(12,8))
+    fig = plt.figure(figsize=(9,6))
     ax1 = fig.add_subplot(111)
     ax2 = ax1.twiny()
 
@@ -82,7 +82,7 @@ for year in years:
 
     # Plot 2. ZOOM (the real deal)
 
-    fig = plt.figure(figsize=(12,8))
+    fig = plt.figure(figsize=(9,6))
     ax1 = fig.add_subplot(111)
     ax2 = ax1.twiny()
 
