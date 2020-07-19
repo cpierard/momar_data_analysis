@@ -77,7 +77,7 @@ for year in years:
     ax2.set_xticklabels(upper_tick_labels, fontsize=13)
     ax1.legend(loc='lower left', shadow=True)
     ax1.set_title(f'{instrument.upper()} {year}', loc='right') # remove for publishing
-    plt.savefig(f'../figures/depths/{instrument}/PSD_temp_{instrument}_{year}')
+    plt.savefig(f'../../figures/PowerSpectra/{instrument}/PSD_temp_{instrument}_{year}')
     plt.close()
 
     # Plot 2. ZOOM (the real deal)
@@ -112,5 +112,5 @@ for year in years:
     ax2.set_xticklabels(upper_tick_labels_zoom, fontsize=13)
     ax1.legend(loc='upper right', shadow=True)
     ax1.set_title(f'{instrument.upper()} {year}', loc='right') # remove for publishing
-    plt.savefig(f'../figures/zoom/{instrument}/PSD_temp_{instrument}_{year}_zoom')
+    plt.savefig(f'../../figures/PowerSpectra/{instrument}/zoom_PSD_temp_{instrument}_{year}')
     plt.close()

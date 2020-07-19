@@ -90,6 +90,7 @@ def ridge_plot(data, xlabel ='', title='', bins=128, h_space=-0.5, alpha=1, figs
         axes[j].text(min_glob, 0., labels[j], fontweight="bold", fontsize=13, ha="right")
 
     plt.subplots_adjust(hspace=h_space)
+    return fig, axes
 
 def waterfall_plot(data, bins=64, dist_height=30, alpha=1, figsize=(6,7), cmap='tab10', border=False):
     """

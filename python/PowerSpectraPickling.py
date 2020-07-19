@@ -8,12 +8,14 @@ instrument = sys.argv[1] # 'rbr', 'sbe'
 years = list(sys.argv[2:])
 
 for year in years:
+    print(type(year))
     print(instrument, year)
     Data = {}
     PowerSpectra = {}
 
     if instrument == 'rbr':
         dt = 15/(3600*24)
+
         with Dataset(f'../../netcdf/{year}/rbr.nc', 'r') as nc:
             for i, depth in enumerate(nc['DEPTH'][:]):
                 #print(i, depth)
@@ -21,9 +23,11 @@ for year in years:
                 Data[depth] = aux_array[~np.isnan(aux_array)]
                 #Data[depth] = np.array(nc['TEMP'][:,i].data)
 
+
     elif instrument == 'sbe':
         if year == '2011':
             dt = 180/(3600*24) # 2011 has a period of 180s
+
         else:
             dt = 360/(3600*24)
 
@@ -38,8 +42,8 @@ for year in years:
                     print(f'{year} - {d_i} has no TEMP')
 
     for depth in Data.keys():
+        print(0)
         temp = Data[depth]
-
         freq_aux = np.array([])
         psd_aux = np.array([])
 
@@ -56,7 +60,8 @@ for year in years:
             ind, = np.where(((freq >= lims[i]) & (freq < lims[i+1])))
             freq_aux = np.concatenate((freq_aux, freq[ind]))
             psd_aux = np.concatenate((psd_aux, psd[ind]))
-
+            print(1)
+            
         freq, psd = sg.welch(temp, fs=1./dt, window='hanning', nperseg=windows[-1], noverlap=0.15)
         ind, = np.where(freq >= lims[-1])
         freq_aux = np.concatenate((freq_aux, freq[ind]))
