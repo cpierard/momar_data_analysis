@@ -61,7 +61,7 @@ for year in years:
             freq_aux = np.concatenate((freq_aux, freq[ind]))
             psd_aux = np.concatenate((psd_aux, psd[ind]))
             print(1)
-            
+
         freq, psd = sg.welch(temp, fs=1./dt, window='hanning', nperseg=windows[-1], noverlap=0.15)
         ind, = np.where(freq >= lims[-1])
         freq_aux = np.concatenate((freq_aux, freq[ind]))

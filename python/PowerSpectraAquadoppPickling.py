@@ -37,8 +37,8 @@ for year in years:
         freq_aux = np.array([])
         psd_aux = np.array([])
 
-        windows = np.array([49, 35, 10, 2, 0.5])/dt # the size of the windows in days/dt
-        lims = [0.08, 1, 3, 10, 20] # limit frequency for windows
+        windows = np.array([100, 20, 10, 2, 0.5])/dt # the size of the windows in days/dt
+        lims = [0.08, 1.2, 3, 10, 20] # limit frequency for windows
 
         freq, psd = sg.periodogram(temp, fs=1./dt)
         ind, = np.where(freq < lims[0])
