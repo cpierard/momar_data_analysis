@@ -3,7 +3,7 @@ import pickle
 import sys
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-plt.rcParams.update({'font.size': 14})
+plt.rcParams.update({'font.size': 13})
 colormap='tab10'
 
 def lucky_bvf(z_i):
@@ -47,20 +47,24 @@ for year in years:
     with open(path, 'rb') as f:
         PowerSpectra= pickle.load(f)
 
-    x_colors = np.linspace(0, 1, len(PowerSpectra.keys()))
-    colors = cm.get_cmap(colormap)(x_colors)
+    #x_colors = np.linspace(0, 1, len(PowerSpectra.keys()))
+    #colors = cm.get_cmap(colormap)(x_colors)
 
 
-    fig = plt.figure(figsize=(9,6))
+    fig = plt.figure(figsize=(9,4), tight_layout=True)
     ax1 = fig.add_subplot(111)
     ax2 = ax1.twiny()
 
     for j, depth in enumerate(sorted(PowerSpectra.keys())):
+        print(year, depth)
+        if depth==1000: #only for 2018
+            print('tttt')
+            continue
     #for depth in sorted(PowerSpectra.keys()):
         ax1.loglog(PowerSpectra[depth]['freq'],
                    PowerSpectra[depth]['psd'],
-                   label=f"{depth:0.0f}m",
-                c=colors[j])
+                   label=f"{depth:0.0f}m")#,
+                #c=colors[j])
 
     ax2.loglog(PowerSpectra[depth]['freq'], PowerSpectra[depth]['psd'], alpha=0)
 
@@ -69,28 +73,28 @@ for year in years:
 
     ax1.grid()
     ax1.set_xlabel('Frequency (cpd)', fontsize=14)
-    ax1.set_ylabel('Power spectral density (Temperature)', fontsize=14)
-    ax1.set_xlim(1e-3, 5e3)
-    ax1.set_ylim(1e-11,1e1)
+    ax1.set_ylabel('PSD ($\degree C^2 / cpd$)', fontsize=14)
+    ax1.set_xlim(1e-3, 1e3)
+    ax1.set_ylim(1e-11,1e2)
     ax2.set_xlim(ax1.get_xlim())
     ax2.set_xticks(upper_tick_locations)
     ax2.set_xticklabels(upper_tick_labels, fontsize=13)
-    ax1.legend(loc='lower left', shadow=True)
-    ax1.set_title(f'{instrument.upper()} {year}', loc='right') # remove for publishing
-    plt.savefig(f'../../figures/PowerSpectra/{instrument}/PSD_temp_{instrument}_{year}')
+    ax1.legend(loc='lower left', shadow=True, ncol=3)
+    #ax1.set_title(f'{instrument.upper()} {year}', loc='right') # remove for publishing
+    plt.savefig(f'../../figures/PowerSpectra/{instrument}/PSD_temp_{instrument}_{year}', facecolor=(1,0,0,0))
     plt.close()
 
     # Plot 2. ZOOM (the real deal)
 
-    fig = plt.figure(figsize=(9,6))
+    fig = plt.figure(figsize=(9,4), tight_layout=True)
     ax1 = fig.add_subplot(111)
     ax2 = ax1.twiny()
 
     for j, depth in enumerate(sorted(PowerSpectra.keys())):
         ax1.loglog(PowerSpectra[depth]['freq'],
                    PowerSpectra[depth]['psd'],
-                   label=f"{depth:0.0f}m",
-                c=colors[j])
+                   label=f"{depth:0.0f}m")#,
+                #c=colors[j])
 
     ax2.loglog(PowerSpectra[depth]['freq'], PowerSpectra[depth]['psd'], alpha=0)
 
@@ -99,18 +103,18 @@ for year in years:
 
     ax1.grid()
     ax1.set_xlabel('Frequency (cpd)', fontsize=14)
-    ax1.set_ylabel('Power spectral density (Temperature)', fontsize=14)
+    ax1.set_ylabel('PSD ($\degree C^2 / cpd$)', fontsize=14)
 
     ax1.set_xlim(0.9, 1e1)
     ax2.set_xlim(0.9, 1e1)
 
-    ax1.set_ylim(1e-5,1e0)
-    ax2.set_ylim(1e-5,1e0)
+    ax1.set_ylim(1e-5,1e2)
+    ax2.set_ylim(1e-5,1e2)
 
     ax2.set_xlim(ax1.get_xlim())
     ax2.set_xticks(upper_tick_locations_zoom)
     ax2.set_xticklabels(upper_tick_labels_zoom, fontsize=13)
-    ax1.legend(loc='upper right', shadow=True)
-    ax1.set_title(f'{instrument.upper()} {year}', loc='right') # remove for publishing
-    plt.savefig(f'../../figures/PowerSpectra/{instrument}/zoom_PSD_temp_{instrument}_{year}')
+    ax1.legend(loc='upper right', shadow=True, ncol=3)
+    #ax1.set_title(f'{instrument.upper()} {year}', loc='right') # remove for publishing
+    plt.savefig(f'../../figures/PowerSpectra/{instrument}/zoom_PSD_temp_{instrument}_{year}', facecolor=(1,0,0,0))
     plt.close()
